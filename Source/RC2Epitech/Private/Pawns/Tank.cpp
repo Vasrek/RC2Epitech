@@ -26,3 +26,15 @@ void ATank::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 }
+
+void ATank::Move(const FInputActionValue& Value)
+{
+	
+}
+
+void ATank::Look(const FInputActionValue& Value)
+{
+	
+}
+
+
