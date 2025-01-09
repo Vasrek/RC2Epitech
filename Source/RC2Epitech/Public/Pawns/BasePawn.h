@@ -20,6 +20,10 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	void RotateTurret(FVector LookAtTarget);
+
+	UPROPERTY(EditAnywhere, Category = "Canon properties")
+	float InterpSpeed = 5.f;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintreadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

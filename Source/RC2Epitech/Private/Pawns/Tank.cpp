@@ -5,6 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 ATank::ATank()
 {
@@ -47,6 +48,19 @@ void ATank::BeginPlay()
 void ATank::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+		if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+		{
+			FHitResult HitResult;
+			PlayerController->GetHitResultUnderCursor(
+				ECC_Visibility,
+				false,
+				HitResult
+			);
+
+			RotateTurret(HitResult.ImpactPoint);
+		}
+	
 }
 
 void ATank::Move(const FInputActionValue& Value)
