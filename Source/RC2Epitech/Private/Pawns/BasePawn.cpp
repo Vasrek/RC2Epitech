@@ -1,6 +1,8 @@
 #include "Pawns/BasePawn.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Projectiles/Projectile.h"
+#include "Sound/SoundCue.h"
 
 ABasePawn::ABasePawn()
 {
@@ -49,5 +51,27 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 			LookAtRotation,
 			UGameplayStatics::GetWorldDeltaSeconds(this),
 			InterpSpeed));
+}
+
+void ABasePawn::Fire()
+{
+	FVector ProjectileSpawnPointLocation = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator ProjectileSpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
+	FVector Scale = ProjectileScale;
+	FTransform SpawnProjectileTransform(ProjectileSpawnRotation, ProjectileSpawnPointLocation, Scale);
+
+	if (ProjectileClass != nullptr)
+	{
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
+		Projectile->SetOwner(this);
+
+		if (FireSFX)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				FireSFX,
+				GetActorLocation());
+		}
+	}
 }
 
