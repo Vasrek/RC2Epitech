@@ -5,6 +5,7 @@
 #include "Projectile.generated.h"
 
 class UProjectileMovementComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class RC2EPITECH_API AProjectile : public AActor
@@ -30,5 +31,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Damage")
 	float Damage = 50.f;
 	
-	
+	UPROPERTY(EditAnywhere, Category = "Damage")
+	UNiagaraSystem* ExplosionVFX;
 };

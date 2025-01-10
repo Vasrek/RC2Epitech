@@ -23,6 +23,8 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaSeconds) override;
 
+	APlayerController* GetTankPlayerController() const { return TankController; }
+
 protected:
 	virtual void BeginPlay() override;
 
